@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos-layout :: cabecalho"></head>
+
+<body class="corBackBody">
+
+	<header th:replace="layout/fragmentos-layout :: barra-navegacao"></header>
+
+
+	<!-- conteúdo principal -->
+	<main class="container">
+	<section class="row">
+		<div class="panel panel-default">
+
+			<div th:replace="layout/fragmentos-mensagens :: mensagem-sucesso" />
+
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title" style="float: left">Pesquisa de Livros</h1>
+					<a th:href="@{/livro/form}" class="btn btn-link"
+						style="float: right">Novo Livro</a>
+				</div>
+			</div>
+
+			<div class="panel-body bodypesquisa">
+				<div class="table-responsive col-md-12 bodypesquisa2">
+					<table
+						class="table table-striped table-responsive order-column hover display compact cell-border datatables-js"
+						cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th class="text-center col-md-1">
+									<div>
+										<input type="checkbox" id="todoscheckbox-js" />
+									</div>
+								</th>
+								<th class="text-center col-md-1">ID</th>
+								<th class="col-sm-1">Capa</th>
+								<th>Título</th>
+								<th class="text-center col-md-1">Autores</th>
+								<th class="text-right col-md-1">Editora</th>
+								<th class="text-center col-md-1">Estoque</th>
+								<!-- 								<th class="text-center col-md-1">Preço Tabela</th> -->
+								<!-- 								<th class="text-center col-md-1">Preço Sugerido</th> -->
+								<!-- 								<th class="text-center col-md-1">Publicação</th> -->
+
+								<th class="text-center col-md-6">______________________Ações_________________________</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- 							<tr th:each="livro : ${livros}"> -->
+							<tr data-th-each="livro : ${livros}">
+
+								<td class="text-center col-sm-1">
+									<!-- <input type="hidden" name="id" th:value="${livro.id}" /> -->
+									<input type="checkbox" th:id="${livro.id}"
+									class="checkboxlivro-js" /> <!-- <input type="checkbox" th:id="'selected'+${livro.id}"  class="checkboxlivro-js" /> -->
+								</td>
+
+								<td class="text-center col-sm-1"><img
+									th:if="${livro.temFotoCapa()== true}"
+									data-th-src="@{|/${livro.detalhesImagem.fotoPath}|}"
+									alt="Foto do Livro" height="60px" /> <img
+									th:if="${livro.temFotoCapa() == false}"
+									data-th-src="@{/imagens/img-livro-indisponivel.jpg}"
+									alt="Foto do Livro" height="60px" /></td>
+
+								<td class="text-center col-sm-1" th:text="${livro.id}"></td>
+								<td class="text-left" th:text="${livro.titulo}"></td>
+								<td class="text-center col-md-2" th:text="${livro.autores}"></td>
+								<td class="text-right col-md-1" th:text="${livro.editora}"></td>
+								<td class="text-center col-md-1"
+									th:text="${livro.quantidaEmEstoque}"></td>
+								<!-- 								<td class="text-right col-sm-1" -->
+								<!-- 									th:text="|R$ ${livro.nossoPreco}|"></td> -->
+								<!-- 								<td class="text-right col-sm-1" -->
+								<!-- 									th:text="|R$ ${livro.precoTabelado}|"></td> -->
+								<!-- 								<td class="text-center col-sm-1" -->
+								<!-- 									th:text="${{livro.dataPublicacao}}"></td> -->
+								<td class="col-sm-4 text-center"><a
+									th:href="@{/livro/visualisa/{id}(id=${livro.id})}"
+									class="btn btn-sm"> <span class="btn btn-success">visualisar</span>
+								</a> <!-- Edição --> <a th:href="@{/livro/{id}(id=${livro.id})}"
+									class="btn btn-sm"> <span class="btn btn-primary">Alterar</span>
+								</a> <!--	<a th:href="@{/livro/deleta{id}(id=${livro.id})}"  method="DELETE" class="btn btn-sm"> <span
+										class="btn btn-danger">Excluir</span> </a> --> <!--                                     <a th:attrappend="data-id=${livro.id}" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Excluir</a> -->
+									<a th:attrappend="data-id=${1}" class="tipo"></a> <a
+									th:attrappend="data-id=${livro.id}"
+									class="btn btn-danger excluir-livro-js" value="excluir">Excluir</a>
+
+								</td>
+								<head
+									th:replace="layout/fragmentos-caixaExclusao :: caixa-exclusao"></head>
+							</tr>
+
+							<tr th:if="${!#lists.isEmpty($livros)}">
+								<td colspan="9">Nenhum Livro foi encontrado</td>
+							</tr>
+
+						</tbody>
+						<tr>
+							<td colspan="9">
+								<button th:id="excluir-livros" class="btn btn-danger btn-sm">Excluir
+									os Livros Selecionados</button>
+							</td>
+						</tr>
+
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- row --> </main>
+
+
+	<div th:replace="layout/fragmentos-layout :: scripts-js"></div>
+
+	<div data-th-replace="layout/fragmentos-scripts :: bootstrap"></div>
+	<div data-th-replace="layout/fragmentos-scripts :: datatables"></div>
+	<div data-th-replace="layout/fragmentos-scripts :: bootbox"></div>
+	<div data-th-replace="layout/fragmentos-scripts :: mybookstore-js"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

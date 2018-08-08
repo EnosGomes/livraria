@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos-layout :: cabecalho"></head>
+
+<body class="corBackBody">
+
+	<header th:replace="layout/fragmentos-layout :: barra-navegacao"></header>
+
+
+	<!-- conteúdo principal -->
+	<main class="container">
+	<section class="row">
+		<div class="panel panel-default">
+
+			<div th:replace="layout/fragmentos-mensagens :: mensagem-sucesso" />
+
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title" style="float: left">Pesquisa de
+						Editoras de Livros</h1>
+					<a th:href="@{/editora/form}" class="btn btn-link"
+						style="float: right">Novo Cadastro de Editora</a>
+				</div>
+			</div>
+
+			<div class="panel-body bodypesquisa">
+				<div class="table-responsive col-md-12 bodypesquisa2">
+					<table class="table table-striped datatables-js" cellspacing="0"
+						cellpadding="0">
+						<thead>
+							<tr>
+								<th class="text-center col-md-1">
+									<div>
+										<input type="checkbox" id="todoscheckbox-js" />
+									</div>
+								</th>
+								<th class="text-center col-md-1">_______________ID______________</th>
+								<th>_____________Nome_Editora_____________</th>
+								<th class="text-center col-md-3">_______________Ações________________</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="editora : ${editoras}">
+
+								<td class="text-center col-sm-1">
+									<!-- <input type="hidden" name="id" th:value="${livro.id}" /> -->
+									<input type="checkbox" th:id="${editora.id}"
+									class="checkboxlivro-js" /> <!-- <input type="checkbox" th:id="'selected'+${livro.id}"  class="checkboxlivro-js" /> -->
+								</td>
+								<td class="text-center col-sm-1" th:text="${editora.id}"></td>
+								<td class="text-left" th:text="${editora.nome}"></td>
+								<td class="col-sm-4 text-center">
+									<!-- 								<a th:href="@{/livro/visualisa/{id}(id=${livro.id})}" class="btn btn-sm"> <span -->
+									<!-- 										class="btn btn-success">visualisar</span> </a> -->
+
+									<!-- Edição --> <a th:href="@{/editora/{id}(id=${editora.id})}"
+									class="btn btn-sm"> <span class="btn btn-primary">Alterar</span>
+								</a> <!--                                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Excluir</a> -->
+									<a th:attrappend="data-id=${2}" class="tipo"></a> <a
+									th:attrappend="data-id=${editora.id}"
+									class=" btn btn-danger excluir-livro-js" value="excluir">Excluir</a>
+								</td>
+<!-- 								<head -->
+<!-- 									th:replace="layout/fragmentos-caixaExclusao :: caixa-exclusao-editora"></head> -->
+							</tr>
+
+							<tr th:if="${!#lists.isEmpty($livros)}">
+								<td colspan="9">Nenhum Livro foi encontrado</td>
+							</tr>
+
+						</tbody>
+						<tr>
+							<td colspan="9">
+								<button th:id="excluir-livros" class="btn btn-danger btn-sm">Excluir
+									as Editoras Selecionadas</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<!-- 			<div id="bottom" class="row"> -->
+			<!-- 		<div class="col-md-12"> -->
+			<!-- 			<ul class="pagination"> -->
+			<!-- 				<li> <a>&lt; Anterior</a></li> -->
+			<!-- 				<li> <a>1</a></li> -->
+			<!-- 				<li><a href="#">2</a></li> -->
+			<!-- 				<li><a href="#">3</a></li> -->
+			<!-- 				<li class="next"><a href="#" rel="next">Proximo &gt;</a></li> -->
+			<!-- 			</ul>/.pagination -->
+			<!-- 		</div> -->
+			<!-- 	</div> /#bottom -->
+
+		</div>
+	</section>
+	<!-- row --> </main>
+
+	<div th:replace="layout/fragmentos-layout :: scripts-js"></div>
+
+	<div data-th-replace="layout/fragmentos-scripts :: bootstrap"></div>
+	<div data-th-replace="layout/fragmentos-scripts :: datatables"></div>
+	<div data-th-replace="layout/fragmentos-scripts :: bootbox"></div>
+	<div data-th-replace="layout/fragmentos-scripts :: mybookstore-js"></div>
+</body>
+</html>

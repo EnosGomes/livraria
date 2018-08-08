@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos-layout :: cabecalho"></head>
+
+<body>
+ <head th:replace="layout/fragmentos-caixaExclusao :: caixa-exclusao"></head> 
+
+<header th:replace="layout/fragmentos-layout :: barra-navegacao"></header>
+<main class="container">
+<div id="main" class="container-fluid bodywiew">
+	<div class="row padb">
+	<div class="col-md-4 tamanho2">
+		<figure>
+			<!--          th:href="@{/livro/deleta{id}(id=${livro.id})}" -->
+			<!--             <img th:src="|/${livro.fotoPath}|" class="tamanhoFoto"/> -->
+			<img th:if="${livro.temFotoCapa()== true}"
+				data-th-src="@{|/${livro.detalhesImagem.fotoPath}|}"
+				alt="Foto do Livro" height="60px" class="tamanhoFoto" />
+
+			<img th:if="${livro.temFotoCapa() == false}"
+				data-th-src="@{/imagens/img-livro-indisponivel.jpg}"
+				alt="Foto do Livro" height="60px" class="tamanhoFoto" />
+			<figcaption>
+				Foto do livro
+				<p th:text="${livro.titulo}"></p>
+			</figcaption>
+		</figure>
+		
+	</div>
+
+	<h3 class="page-header col-md-4 " th:text="${livro.titulo}">Visualizar
+		Item #1</h3>
+
+	<div class="col-md-4  tamanho2">
+		<p>
+			<strong>Descricao</strong>
+		</p>
+		<p th:text="${livro.descricao}">{Valor do Campo}</p>
+	</div>
+     </div>
+	<div class="row  padb">
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Autores</strong>
+			</p>
+			<p th:text="${livro.autores}">{Valor do Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Editora</strong>
+			</p>
+			<p th:text="${livro.editora}">{Valor do Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Quantidade em Estoque</strong>
+			</p>
+			<p th:text="${livro.quantidaEmEstoque}">{Valor do Campo}</p>
+		</div>
+
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Nosso Preco</strong>
+			</p>
+			<p th:text="|R$ ${livro.nossoPreco}|">{Valor do Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Preco Tabelado</strong>
+			</p>
+			<p th:text="|R$ ${livro.precoTabelado}|">{Valor do Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Preco de Aluguel</strong>
+			</p>
+			<p th:text="${{livro.nossoPrecoAluguel}}">{Valor do Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Preco de Renovacao do Aluguel</strong>
+			</p>
+			<p th:text="${{livro.nossoPrecoAluguelRenovacao}}">{Valor do
+				Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Disponibilidade</strong>
+			</p>
+			<p th:if="${{livro.venda_aluguel == 1}}">Venda</p>
+			<p th:if="${{livro.venda_aluguel == 0}}">Aluguel</p>
+			<p th:if="${{livro.venda_aluguel == 3}}">Venda e Aluguel</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Data da Publicacao</strong>
+			</p>
+			<p th:text="${{livro.dataPublicacao}}">{Valor do Campo}</p>
+		</div>
+
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Idioma</strong>
+			</p>
+			<p th:text="${{livro.idioma}}">{Valor do Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Categoria</strong>
+			</p>
+			<p th:text="${livro.categorias}">{Valor do Campo}</p>
+		</div>
+		<!-- <div class="col-md-offset-1 col-md-9"> -->
+		<!-- 						 <label>Categorias</label> -->
+		<!-- 						<ul> -->
+		<!-- 						 	<li th:each="categorialivro : ${todasCategorias}" class="li-inlineblock"> -->
+		<!-- 							  <input type="checkbox" th:field="${livro.categorias}" th:value="${categorialivro.id}" />  -->
+		<!-- 							  <label th:for="${#ids.prev('categorias')}" -->
+		<!-- 								       th:text="${categorialivro.nomeCategoria}">Nome Categoria -->
+		<!-- 								</label> -->
+		<!-- 							</li> -->
+		<!-- 						</ul> -->
+		<!--            </div> -->
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Paginas</strong>
+			</p>
+			<p th:text="${{livro.Paginas}}">{Valor do Campo}</p>
+		</div>
+
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>ISBN</strong>
+			</p>
+			<p th:text="${{livro.isbn}}">{Valor do Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Peso</strong>
+			</p>
+			<p th:text="${{livro.peso}}">{Valor do Campo}</p>
+		</div>
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Status</strong>
+			</p>
+			<p th:if="${{livro.ativo}}">Ativo</p>
+			<p th:if="${{!livro.ativo}}">Inativo</p>
+		</div>
+
+		<div class="col-md-4 tamanho">
+			<p>
+				<strong>Origem</strong>
+			</p>
+			<p th:text="${{livro.origem}}">{Valor do Campo}</p>
+		</div>
+	</div>
+	<!-- .row -->
+
+	<hr />
+	<div id="actions" class="row">
+		<div class="col-md-12">
+			<a th:href="@{/livro/pesquisa}" class="btn btn-sm"> <span
+				class="btn btn-success">Voltar</span>
+			</a>
+
+			<!-- Edição -->
+			<a th:href="@{/livro/{id}(id=${livro.id})}" class="btn btn-sm"> <span
+				class="btn btn-primary">Alterar</span>
+			</a> <a href="#" class="btn btn-danger" data-toggle="modal"
+				data-target="#delete-modal">Excluir</a>
+			<!--                                            <a th:attrappend="data-id=${livro.id}" class="btn btn-danger excluir-livro-js" value="excluir">Excluir</a>  -->
+		</div>
+	</div>
+</div>
+
+<!-- <script src="bootstrap/js/jquery.min.js"></script> --> <!--  <script src="bootstrap/js/bootstrap.min.js"></script> -->
+
+<div th:replace="layout/fragmentos-layout :: scripts-js"></div>
+
+<div data-th-replace="layout/fragmentos-scripts :: bootstrap"></div>
+<div data-th-replace="layout/fragmentos-scripts :: bootbox"></div>
+<div data-th-replace="layout/fragmentos-scripts :: mybookstore-js"></div>
+
+</main>
+</body>
+</html>

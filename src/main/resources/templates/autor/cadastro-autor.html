@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos-layout :: cabecalho"></head>
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap-datepicker/1.6.4/dist/css/bootstrap-datepicker.standalone.min.css}" />
+
+<body class="corBackBody">
+
+	<header th:replace="layout/fragmentos-layout :: barra-navegacao"></header>
+
+	<!-- conteúdo principal -->
+	<main class="container">
+
+	<section >
+
+		<div th:replace="layout/fragmentos-mensagens :: mensagem-sucesso" />
+
+
+
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title" style="float: left">Cadastro de Autor
+						Livro</h1>
+					<a th:href="@{/autor/pesquisa}" class="btn btn-link"
+						style="float: right">Pesquisar Autor Livro</a>
+				</div>
+			</div>
+
+			<div class="panel-body backgroundli textColor padl">
+
+				<!-- formulário de cadastro de livro -->
+				<form class="form-horizontal" th:action="@{/autor/salva}"
+					method="post" th:object="${autorlivro}"
+					enctype="multipart/form-data">
+
+					<div th:replace="layout/fragmentos-mensagens :: mensagem-erro-form" />
+
+					<fieldset>
+						<legend class="center-block">
+							<h2>Cadastro de Autor de Livros</h2>
+							<span style="font-size: small">* Campo requerido</span>
+						</legend>
+
+
+
+						<!-- Campo Id é necessário para diferenciar quando é um novo livro 
+				     ou a edição de um já existente -->
+
+						<input type="hidden" name="id" th:value="${autorlivro.id}" />
+
+						<!-- Título -->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="nomeAutor">*
+								Nome Autor</label>
+
+							<div class="col-md-8">
+								<input type="text" name="nomeAutor" class="form-control"
+									id="nomeAutor" th:value="${autorlivro.nomeAutor}"
+									placeholder="Digite o nome do Autor" /> <span
+									class="help-block">Nome novo Autor</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-2"></div>
+							<div class="col-md-8">
+								<button type="submit" class="btn btn-success">Salvar</button>
+								<a class="btn btn-danger" th:href="@{/}">Cancela</a>
+							</div>
+						</div>
+
+					</fieldset>
+				</form>
+			</div>
+			<!-- panel-body -->
+		</div>
+		<!-- panel -->
+	</section>
+	<!-- row --> </main>
+
+	<div th:replace="layout/fragmentos-layout :: scripts-js"></div>
+	<script
+		th:src="@{/webjars/bootstrap-datepicker/1.6.4/dist/js/bootstrap-datepicker.min.js}"></script>
+	<script
+		th:src="@{/webjars/bootstrap-datepicker/1.6.4/dist/locales/bootstrap-datepicker.pt-BR.min.js}"></script>
+	<script
+		th:src="@{/webjars/jquery-maskmoney/3.0.2/dist/jquery.maskMoney.min.js}"></script>
+	<div th:replace="layout/fragmentos-layout :: mybookstore-js"></div>
+
+</body>
+</html>
