@@ -1,6 +1,6 @@
 # livraria
 
-Sistema de Livraria Web com validação usando thymeleaf e Heroku.
+Sistema Web de Livraria.
 
 ### O que é usado:
 * STS Eclipse
